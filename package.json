@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ethers": "5.4"
+    "dotenv": "^16.0.3",
+    "ethers": "5.4",
+    "sendmail": "^1.6.1"
   }
 }

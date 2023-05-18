@@ -1,5 +1,7 @@
+require('dotenv').config();
 const ethers = require("ethers");
 const abi = require('./tangiblemarketplace.abi.json');
+const sendmail = require('sendmail')();
 
 const provider = new ethers.providers.WebSocketProvider(`wss://polygon-mainnet.g.alchemy.com/v2/pnpmjWAukN3uWbPxt-ukZMMiyIvAXLYL`);
 const marketplace = new ethers.Contract("0x43e656716cF49C008435A8196d8f825f66f37254", abi, provider);
@@ -12,6 +14,12 @@ marketplace.on("MarketItemCreated", (tokenId, seller, paymentToken, price, event
         paymentToken: paymentToken,
         amount: ethers.utils.formatUnits(price, 9),
     });
+    sendmail({
+        from: process.env.EMAIL_FROM,
+        to: process.env.EMAIL_TO,
+        subject: 'Tangible Marketplace MarketItemCreated',
+        html: `tokenId: ${tokenId} price: ${ethers.utils.formatUnits(price, 9)}`,
+    });
 });
 
 marketplace.on("MarketItemUpdated", (tokenId, seller, paymentToken, price, event) => {
@@ -21,6 +29,12 @@ marketplace.on("MarketItemUpdated", (tokenId, seller, paymentToken, price, event
         seller: seller,
         paymentToken: paymentToken,
         amount: ethers.utils.formatUnits(price, 9),
+    });
+    sendmail({
+        from: process.env.EMAIL_FROM,
+        to: process.env.EMAIL_TO,
+        subject: 'Tangible Marketplace MarketItemUpdated',
+        html: `tokenId: ${tokenId} price: ${ethers.utils.formatUnits(price, 9)}`,
     });
 });
 
@@ -33,5 +47,11 @@ marketplace.on("MarketItemSold", (tokenId, seller, buyer, paymentToken, price, f
         paymentToken: paymentToken,
         amount: ethers.utils.formatUnits(price, 9),
         feeAmount: ethers.utils.formatUnits(feeAmount, 9),
+    });
+    sendmail({
+        from: process.env.EMAIL_FROM,
+        to: process.env.EMAIL_TO,
+        subject: 'Tangible Marketplace MarketItemSold',
+        html: `tokenId: ${tokenId} price: ${ethers.utils.formatUnits(price, 9)}`,
     });
 });
