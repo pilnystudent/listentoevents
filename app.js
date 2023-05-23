@@ -64,3 +64,5 @@ marketplace.on("MarketItemSold", (tokenId, seller, buyer, paymentToken, price, f
         <p>price: ${ethers.utils.formatUnits(price, 9)}</p>`,
     });
 });
+
+setTimeout(() => console.log('running'), 60000)
