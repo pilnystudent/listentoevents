@@ -65,4 +65,4 @@ marketplace.on("MarketItemSold", (tokenId, seller, buyer, paymentToken, price, f
     });
 });
 
-setInterval(() => console.log(`${new Date().toLocaleString()} check`), 10000)
+setInterval(() => console.log(`${new Date().toLocaleString()} check`), 600000)
