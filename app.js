@@ -19,7 +19,7 @@ marketplace.on("MarketItemCreated", (tokenId, seller, paymentToken, price, event
         to: process.env.EMAIL_TO,
         subject: 'Tangible Marketplace MarketItemCreated',
         html: `
-        <p><a href="https://www.tangible.store/pi-nfts/0x${Number(tokenId).toString(16)}" target="_blank">link</a></p>
+        <p><a href="https://www.tangible.store/pi-nfts/${tokenId}" target="_blank">link</a></p>
         <p>tokenId: ${tokenId}</p>
         <p>price: ${ethers.utils.formatUnits(price, 9)}</p>`,
     });
@@ -38,7 +38,7 @@ marketplace.on("MarketItemUpdated", (tokenId, seller, paymentToken, price, event
         to: process.env.EMAIL_TO,
         subject: 'Tangible Marketplace MarketItemUpdated',
         html: `
-        <p><a href="https://www.tangible.store/pi-nfts/0x${Number(tokenId).toString(16)}" target="_blank">link</a></p>
+        <p><a href="https://www.tangible.store/pi-nfts/${tokenId}" target="_blank">link</a></p>
         <p>tokenId: ${tokenId}</p>
         <p>price: ${ethers.utils.formatUnits(price, 9)}</p>`,
     });
@@ -59,7 +59,7 @@ marketplace.on("MarketItemSold", (tokenId, seller, buyer, paymentToken, price, f
         to: process.env.EMAIL_TO,
         subject: 'Tangible Marketplace MarketItemSold',
         html: `
-        <p><a href="https://www.tangible.store/pi-nfts/0x${Number(tokenId).toString(16)}" target="_blank">link</a></p>
+        <p><a href="https://www.tangible.store/pi-nfts/${tokenId}" target="_blank">link</a></p>
         <p>tokenId: ${tokenId}</p>
         <p>price: ${ethers.utils.formatUnits(price, 9)}</p>`,
     });
